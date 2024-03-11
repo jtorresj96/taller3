@@ -1,0 +1,47 @@
+[2024-03-10T17:44:10.674+0000] {logging_mixin.py:149} INFO - Changing /opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T17:44:07.128159+00:00/task_id=train_model permission to 509
+[2024-03-10T17:44:10.676+0000] {logging_mixin.py:149} INFO - Failed to change /opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T17:44:07.128159+00:00/task_id=train_model permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T17:44:07.128159+00:00/task_id=train_model'
+[2024-03-10T17:44:10.773+0000] {logging_mixin.py:149} INFO - Changing /opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T17:44:07.128159+00:00/task_id=train_model permission to 509
+[2024-03-10T17:44:10.776+0000] {logging_mixin.py:149} INFO - Failed to change /opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T17:44:07.128159+00:00/task_id=train_model permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T17:44:07.128159+00:00/task_id=train_model'
+[2024-03-10T17:44:10.864+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: train_penguin_sex_model.train_model manual__2024-03-10T17:44:07.128159+00:00 [queued]>
+[2024-03-10T17:44:10.885+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: train_penguin_sex_model.train_model manual__2024-03-10T17:44:07.128159+00:00 [queued]>
+[2024-03-10T17:44:10.886+0000] {taskinstance.py:1331} INFO - Starting attempt 1 of 2
+[2024-03-10T17:44:10.921+0000] {taskinstance.py:1350} INFO - Executing <Task(PythonOperator): train_model> on 2024-03-10 17:44:07.128159+00:00
+[2024-03-10T17:44:10.939+0000] {standard_task_runner.py:57} INFO - Started process 83 to run task
+[2024-03-10T17:44:10.948+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'train_penguin_sex_model', 'train_model', 'manual__2024-03-10T17:44:07.128159+00:00', '--job-id', '62', '--raw', '--subdir', 'DAGS_FOLDER/train_model.py', '--cfg-path', '/tmp/tmp1ymw9lc0']
+[2024-03-10T17:44:10.958+0000] {standard_task_runner.py:85} INFO - Job 62: Subtask train_model
+[2024-03-10T17:44:11.100+0000] {logging_mixin.py:149} INFO - Changing /opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T17:44:07.128159+00:00/task_id=train_model permission to 509
+[2024-03-10T17:44:11.101+0000] {logging_mixin.py:149} INFO - Failed to change /opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T17:44:07.128159+00:00/task_id=train_model permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T17:44:07.128159+00:00/task_id=train_model'
+[2024-03-10T17:44:11.106+0000] {task_command.py:410} INFO - Running <TaskInstance: train_penguin_sex_model.train_model manual__2024-03-10T17:44:07.128159+00:00 [running]> on host f95f5ac280e4
+[2024-03-10T17:44:11.343+0000] {taskinstance.py:1570} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='train_penguin_sex_model' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2024-03-10T17:44:07.128159+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-03-10T17:44:07.128159+00:00'
+[2024-03-10T17:44:11.545+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/sklearn/utils/validation.py:1692: FutureWarning: Feature names only support names that are all strings. Got feature names with dtypes: ['quoted_name']. An error will be raised in 1.2.
+  FutureWarning,
+
+[2024-03-10T17:44:11.550+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/sklearn/utils/validation.py:1692: FutureWarning: Feature names only support names that are all strings. Got feature names with dtypes: ['quoted_name']. An error will be raised in 1.2.
+  FutureWarning,
+
+[2024-03-10T17:44:11.553+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/sklearn/utils/validation.py:1692: FutureWarning: Feature names only support names that are all strings. Got feature names with dtypes: ['quoted_name']. An error will be raised in 1.2.
+  FutureWarning,
+
+[2024-03-10T17:44:11.557+0000] {taskinstance.py:1847} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/train_model.py", line 45, in train_penguin_sex_model
+    model.fit(X_train, y_train)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sklearn/linear_model/_logistic.py", line 1514, in fit
+    accept_large_sparse=solver not in ["liblinear", "sag", "saga"],
+  File "/home/airflow/.local/lib/python3.7/site-packages/sklearn/base.py", line 581, in _validate_data
+    X, y = check_X_y(X, y, **check_params)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sklearn/utils/validation.py", line 979, in check_X_y
+    y = _check_y(y, multi_output=multi_output, y_numeric=y_numeric)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sklearn/utils/validation.py", line 994, in _check_y
+    _assert_all_finite(y)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sklearn/utils/validation.py", line 116, in _assert_all_finite
+    type_err, msg_dtype if msg_dtype is not None else X.dtype
+ValueError: Input contains NaN, infinity or a value too large for dtype('float64').
+[2024-03-10T17:44:11.576+0000] {taskinstance.py:1373} INFO - Marking task as UP_FOR_RETRY. dag_id=train_penguin_sex_model, task_id=train_model, execution_date=20240310T174407, start_date=20240310T174410, end_date=20240310T174411
+[2024-03-10T17:44:11.601+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 62 for task train_model (Input contains NaN, infinity or a value too large for dtype('float64').; 83)
+[2024-03-10T17:44:11.656+0000] {local_task_job_runner.py:232} INFO - Task exited with return code 1
+[2024-03-10T17:44:11.714+0000] {taskinstance.py:2674} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,26 @@
+[2024-03-10T23:22:44.908+0000] {logging_mixin.py:149} INFO - Changing /opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T23:21:39.451814+00:00/task_id=train_model permission to 509
+[2024-03-10T23:22:44.909+0000] {logging_mixin.py:149} INFO - Failed to change /opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T23:21:39.451814+00:00/task_id=train_model permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T23:21:39.451814+00:00/task_id=train_model'
+[2024-03-10T23:22:44.955+0000] {logging_mixin.py:149} INFO - Changing /opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T23:21:39.451814+00:00/task_id=train_model permission to 509
+[2024-03-10T23:22:44.957+0000] {logging_mixin.py:149} INFO - Failed to change /opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T23:21:39.451814+00:00/task_id=train_model permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T23:21:39.451814+00:00/task_id=train_model'
+[2024-03-10T23:22:45.010+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: train_penguin_sex_model.train_model manual__2024-03-10T23:21:39.451814+00:00 [queued]>
+[2024-03-10T23:22:45.028+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: train_penguin_sex_model.train_model manual__2024-03-10T23:21:39.451814+00:00 [queued]>
+[2024-03-10T23:22:45.029+0000] {taskinstance.py:1331} INFO - Starting attempt 2 of 2
+[2024-03-10T23:22:45.055+0000] {taskinstance.py:1350} INFO - Executing <Task(PythonOperator): train_model> on 2024-03-10 23:21:39.451814+00:00
+[2024-03-10T23:22:45.069+0000] {standard_task_runner.py:57} INFO - Started process 135 to run task
+[2024-03-10T23:22:45.075+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'train_penguin_sex_model', 'train_model', 'manual__2024-03-10T23:21:39.451814+00:00', '--job-id', '151', '--raw', '--subdir', 'DAGS_FOLDER/train_model.py', '--cfg-path', '/tmp/tmpvreny2fh']
+[2024-03-10T23:22:45.079+0000] {standard_task_runner.py:85} INFO - Job 151: Subtask train_model
+[2024-03-10T23:22:45.201+0000] {logging_mixin.py:149} INFO - Changing /opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T23:21:39.451814+00:00/task_id=train_model permission to 509
+[2024-03-10T23:22:45.201+0000] {logging_mixin.py:149} INFO - Failed to change /opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T23:21:39.451814+00:00/task_id=train_model permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=train_penguin_sex_model/run_id=manual__2024-03-10T23:21:39.451814+00:00/task_id=train_model'
+[2024-03-10T23:22:45.203+0000] {task_command.py:410} INFO - Running <TaskInstance: train_penguin_sex_model.train_model manual__2024-03-10T23:21:39.451814+00:00 [running]> on host f95f5ac280e4
+[2024-03-10T23:22:45.373+0000] {taskinstance.py:1570} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='train_penguin_sex_model' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2024-03-10T23:21:39.451814+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-03-10T23:21:39.451814+00:00'
+[2024-03-10T23:22:45.596+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/sklearn/utils/validation.py:1692: FutureWarning: Feature names only support names that are all strings. Got feature names with dtypes: ['quoted_name']. An error will be raised in 1.2.
+  FutureWarning,
+
+[2024-03-10T23:22:45.627+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/sklearn/utils/validation.py:1692: FutureWarning: Feature names only support names that are all strings. Got feature names with dtypes: ['quoted_name']. An error will be raised in 1.2.
+  FutureWarning,
+
+[2024-03-10T23:22:45.632+0000] {logging_mixin.py:149} INFO - Accuracy: 0.8805970149253731
+[2024-03-10T23:22:45.637+0000] {python.py:183} INFO - Done. Returned value was: None
+[2024-03-10T23:22:45.651+0000] {taskinstance.py:1373} INFO - Marking task as SUCCESS. dag_id=train_penguin_sex_model, task_id=train_model, execution_date=20240310T232139, start_date=20240310T232245, end_date=20240310T232245
+[2024-03-10T23:22:45.688+0000] {local_task_job_runner.py:232} INFO - Task exited with return code 0
+[2024-03-10T23:22:45.708+0000] {taskinstance.py:2674} INFO - 0 downstream tasks scheduled from follow-on schedule check
