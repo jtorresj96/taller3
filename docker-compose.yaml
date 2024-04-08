@@ -64,7 +64,11 @@ x-airflow-common:
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
-    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-pandas scikit-learn mysql-connector-python}
+    MLFLOW_TRACKING_URI: http://mlflow:1880
+    MLFLOW_S3_ENDPOINT_URL: http://minio:9000
+    AWS_ACCESS_KEY_ID: minio_user
+    AWS_SECRET_ACCESS_KEY: minio_password
+    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-pandas scikit-learn mysql-connector-python mlflow boto3 mlflow[s3] temp}
 
     # yamllint disable rule:line-length
     # Use simple http server on scheduler for health checks
@@ -78,6 +82,7 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     - ${AIRFLOW_PROJ_DIR:-.}/data:/opt/airflow/data
+    - ${AIRFLOW_PROJ_DIR:-.}/mlflow:/mlflow
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
@@ -122,8 +127,9 @@ services:
     volumes:
       - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
       - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
-      - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins 
+      - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
       - ${AIRFLOW_PROJ_DIR:-.}/data:/opt/airflow/data
+      - ${AIRFLOW_PROJ_DIR:-.}/mlflow:/mlflow
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
       interval: 30s
@@ -300,6 +306,42 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+
+
+  # MinIO server
+  minio:
+    image: minio/minio
+    expose:
+      - "9000"
+    ports:
+      - "9000:9000"
+      # MinIO Console is available at http://localhost:9001
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: "minio_user"
+      MINIO_ROOT_PASSWORD: "minio_password"
+    healthcheck:
+      test: timeout 5s bash -c ':> /dev/tcp/127.0.0.1/9000' || exit 1
+      interval: 1s
+      timeout: 10s
+      retries: 5
+    command: server /data --console-address ":9001"
+  # Create a bucket named "bucket" if it doesn't exist
+  minio-create-bucket:
+    image: minio/mc
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      bash -c "
+      mc alias set minio http://minio:9000 minio_user minio_password &&
+      if ! mc ls minio | grep --quiet bucket; then
+        mc mb minio/bucket
+      else
+        echo 'bucket already exists'
+      fi
+      "
+
   mysql:
     image: mysql:5.7
     environment:
@@ -312,20 +354,35 @@ services:
     volumes:
       - mysql_db_volume:/var/lib/mysql
 
-  fastapi-container:
-    image: tiangolo/uvicorn-gunicorn-fastapi:python3.9
-    
-    command: bash -c "pip install pandas scikit-learn mysql-connector-python joblib numpy fastapi uvicorn pydantic && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+  mlflow:
+    build: .
+    user: root
+    ports:
+      - "1880:1880"
+    environment:
+      MLFLOW_S3_ENDPOINT_URL: http://localhost:9000 # Replace this with remote storage endpoint e.g. s3://my-bucket in real use cases
+      AWS_ACCESS_KEY_ID: minio_user
+      AWS_SECRET_ACCESS_KEY: minio_password
+    volumes:
+      - ./mlflow:/mlflow
+
+  fastapi_service:
+    image: python:3.8
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    command: bash -c "pip install -r requirements.txt && uvicorn main:app --host 0.0.0.0 --port 8000"
     ports:
       - "8000:8000"
-    volumes:
-      - ./app:/app/app
-      - ./data:/app/data
     environment:
-      - MODULE_NAME=app.main
-      - VARIABLE_NAME=app
+      - MLFLOW_TRACKING_URI=http://mlflow:1880
+      # Añade aquí más variables de entorno si son necesarias
+    depends_on:
+      - mlflow # Si tu servicio depende de MLflow u otros servicios
 
 volumes:
   postgres-db-volume:
   mysql_db_volume:
+
+
 

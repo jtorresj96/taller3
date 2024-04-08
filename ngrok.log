@@ -1,0 +1,13 @@
+t=2024-04-06T21:09:25-0500 lvl=info msg="no configuration paths supplied"
+t=2024-04-06T21:09:25-0500 lvl=info msg="using configuration at default config path" path=/home/estudiante/.config/ngrok/ngrok.yml
+t=2024-04-06T21:09:25-0500 lvl=info msg="open config file" path=/home/estudiante/.config/ngrok/ngrok.yml err=nil
+t=2024-04-06T21:09:25-0500 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+t=2024-04-06T21:09:26-0500 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="failed to send authentication request: read tcp 10.43.101.153:40360->3.12.62.205:443: read: connection reset by peer"
+t=2024-04-06T21:09:26-0500 lvl=warn msg="failed to check for update" obj=updater err="Post \"https://update.equinox.io/check\": read tcp 10.43.101.153:58220->52.202.168.65:443: read: connection reset by peer"
+t=2024-04-06T21:09:26-0500 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="failed to send authentication request: read tcp 10.43.101.153:40374->3.12.62.205:443: read: connection reset by peer"
+t=2024-04-06T21:09:28-0500 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="failed to send authentication request: read tcp 10.43.101.153:40382->3.12.62.205:443: read: connection reset by peer"
+t=2024-04-06T21:09:30-0500 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="failed to send authentication request: read tcp 10.43.101.153:40392->3.12.62.205:443: read: connection reset by peer"
+t=2024-04-06T21:09:34-0500 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="failed to send authentication request: read tcp 10.43.101.153:57012->3.12.62.205:443: read: connection reset by peer"
+t=2024-04-06T21:09:34-0500 lvl=info msg="Got quit command" obj=consoleui
+t=2024-04-06T21:09:34-0500 lvl=info msg="received stop request" obj=app stopReq="{err:<nil> restart:false}"
+t=2024-04-06T21:09:34-0500 lvl=info msg="session closing" obj=tunnels.session err=nil
